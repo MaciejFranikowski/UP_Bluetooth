@@ -1,0 +1,58 @@
+﻿<Window x:Class="BluetoothUP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:local="clr-namespace:BluetoothUP"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Label Width="112"
+               Height="24"
+               Margin="10,0,0,31"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Content="Select adapter" />
+        <ComboBox x:Name="comboBoxAdapter"
+                  Width="136"
+                  Height="21"
+                  Margin="10,0,0,10"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding BtAdapters}"
+                  SelectedItem="{Binding CurrentAdapter}"/>
+        <Button Width="92"
+                Height="21"
+                Margin="151,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="ClickAdapters_Button"
+                Content="Update adapters" />
+        <Button Width="124"
+                Height="21"
+                Margin="248,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="ClickSearch_Button"
+                Content="Search for BT Devices" />
+        <Button Width="124"
+                Height="21"
+                Margin="518,0,0,10"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="ClickPair_Button"
+                Content="Try to pair with device" />
+        <!-- Interestingly the name of the device for BT devices is "Device name" not "Name" -->
+        <ComboBox x:Name="comboBoxBTDevices"
+                  Width="136"
+                  Height="21"
+                  Margin="377,0,0,10"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  DisplayMemberPath="DeviceName"
+                  ItemsSource="{Binding BluetoothDevices, diag:PresentationTraceSources.TraceLevel=High}"
+                  SelectedItem="{Binding ChosenDevice}" />
+    </Grid>
+</Window>
