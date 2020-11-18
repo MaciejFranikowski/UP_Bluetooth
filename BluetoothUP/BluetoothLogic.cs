@@ -65,6 +65,8 @@ namespace BluetoothUP
 
             if (BtAdapters.Any())
             {
+                // If we write currentAdapter = BtAdapters[0], this doesnt update instatnly. Why?
+                // Property assignment vs variable?
                 CurrentAdapter = BtAdapters[0];
             }
             else
@@ -80,8 +82,7 @@ namespace BluetoothUP
             BluetoothDevices.Clear();
             localEndPoint = new BluetoothEndPoint(CurrentAdapter.LocalAddress, BluetoothService.SerialPort);
             client = new BluetoothClient(localEndPoint);
-            BluetoothDeviceInfo[] temp = client.DiscoverDevices();
-            foreach (BluetoothDeviceInfo device in temp)
+            foreach (BluetoothDeviceInfo device in client.DiscoverDevices())
             {
                 BluetoothDevices.Add(device);
             }
